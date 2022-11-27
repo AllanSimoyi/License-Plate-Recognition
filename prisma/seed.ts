@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import dayjs from 'dayjs';
 
 const prisma = new PrismaClient();
 
@@ -22,7 +23,7 @@ async function seed () {
     },
   });
 
-  [...Array(20).keys()].reduce(async acc => {
+  [...Array(20).keys()].reduce(async (acc, current) => {
     await acc;
     await prisma.vehicle.create({
       data: {
@@ -32,6 +33,7 @@ async function seed () {
         makeAndModel: faker.vehicle.model(),
         vin: faker.vehicle.vrm(),
         licenseNumber: faker.vehicle.vin(),
+        createdAt: current % 2 === 0 ? new Date() : dayjs().subtract(1, "day").toDate(),
       }
     });
   }, Promise.resolve());
