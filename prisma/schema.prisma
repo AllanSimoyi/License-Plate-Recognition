@@ -1,0 +1,31 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique @default("")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  hashedPassword String @default("")
+}
+
+model Vehicle {
+  id            Int    @id @default(autoincrement())
+  image         String @default("")
+  fullName      String
+  phoneNumber   String
+  makeAndModel  String
+  vin           String
+  licenseNumber String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
