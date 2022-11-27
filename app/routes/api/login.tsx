@@ -21,6 +21,7 @@ function fieldErrorsToString (fieldErrors: FieldErrors) {
 
 export async function action ({ request }: ActionArgs) {
   try {
+    console.log("Body:", request.body);
     const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || "";
 
     const formData = await request.formData();
