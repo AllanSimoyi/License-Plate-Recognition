@@ -34,7 +34,7 @@ export function VehicleListItem (props: Props) {
               <Text fontSize="md">
                 <b>{vehicle.fullName}</b>
                 <br />
-                License #: {vehicle.licenseNumber}
+                Phone #: {vehicle.phoneNumber}
               </Text>
             </VStack>
           </HStack>

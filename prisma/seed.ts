@@ -30,8 +30,8 @@ async function seed () {
         fullName: faker.name.fullName(),
         phoneNumber: faker.phone.number(),
         makeAndModel: faker.vehicle.model(),
-        vin: faker.vehicle.vin(),
-        licenseNumber: faker.vehicle.vrm(),
+        vin: faker.vehicle.vrm(),
+        licenseNumber: faker.vehicle.vin(),
       }
     });
   }, Promise.resolve());
