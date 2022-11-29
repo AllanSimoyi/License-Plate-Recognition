@@ -23,7 +23,7 @@ async function seed () {
     },
   });
 
-  [...Array(20).keys()].reduce(async (acc, current) => {
+  await [...Array(4).keys()].reduce(async (acc, current) => {
     await acc;
     await prisma.vehicle.create({
       data: {
@@ -34,6 +34,18 @@ async function seed () {
         vin: faker.vehicle.vrm(),
         licenseNumber: faker.vehicle.vin(),
         createdAt: current % 2 === 0 ? new Date() : dayjs().subtract(1, "day").toDate(),
+      }
+    });
+  }, Promise.resolve());
+
+  const vehicles = await prisma.vehicle.findMany();
+
+  await vehicles.reduce(async (acc, vehicle, index) => {
+    await acc;
+    await prisma.flag.create({
+      data: {
+        vehicleId: vehicle.id,
+        dateTime: index % 2 === 0 ? new Date() : dayjs().subtract(1, "day").toDate(),
       }
     });
   }, Promise.resolve());
