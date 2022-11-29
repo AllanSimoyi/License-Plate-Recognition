@@ -5,7 +5,9 @@ import { FALLBACK_ERROR_MESSAGE } from "~/lib/errors";
 
 export async function loader (_: LoaderArgs) {
   try {
-    const flags = await prisma.flag.findMany();
+    const flags = await prisma.flag.findMany({
+      include: { vehicle: true },
+    });
 
     return json({ flags });
   } catch ({ message }) {

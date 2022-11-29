@@ -24,6 +24,9 @@ export async function action ({ request, params }: ActionArgs) {
     data: {
       vehicleId,
       dateTime,
+    },
+    include: {
+      vehicle: true,
     }
   });
 
