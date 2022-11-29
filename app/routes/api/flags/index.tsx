@@ -8,9 +8,12 @@ export async function loader (_: LoaderArgs) {
     const flags = await prisma.flag.findMany({
       include: { vehicle: true },
     });
+    flags.slice(0, 5).forEach(flag => {
+      console.log(JSON.stringify(flag));
+    });
 
     return json({ flags });
   } catch ({ message }) {
-    return json({ errorMessage: message as string || FALLBACK_ERROR_MESSAGE }, { status: 400 });
+    return json({ errorMessage: message as string || FALLBACK_ERROR_MESSAGE }, { status: 200 });
   }
 }
